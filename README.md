@@ -17,4 +17,4 @@
     "prompt": "THE FIRST QUESTION"
 }
 ```
-![example send message](https://github.com//maphim/chatgpt-backend/blob/main/images/example.jpg?raw=true)
+![example send message](https://raw.githubusercontent.com/maphim/chatgpt-backend/main/images/example.png?raw=true)
