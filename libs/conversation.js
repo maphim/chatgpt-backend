@@ -6,6 +6,8 @@ const Conversation = function (id) {
 
 Conversation.prototype.init = function (id) {
 
+    this.setLimitAnswer();
+
     if (!id) {
         this.makeId();
         this.emptyData();
@@ -28,6 +30,14 @@ Conversation.prototype.emptyData = function () {
     }
 }
 
+/**
+ * Set limit tokens and optimizer quotas.
+ * @param {number} limit maximum gpt response characters 
+ */
+Conversation.prototype.setLimitAnswer = function (limit = 120) {
+    this.answerLimit = limit;
+}
+
 Conversation.prototype.writeData = function () {
     try {
         fs.writeFileSync(`./data/${this._id}`, JSON.stringify(this._data));
@@ -47,16 +57,16 @@ Conversation.prototype.readData = function () {
 }
 
 /**
- * Submit chat item
+ * Set message
  * @param {string} type question (Q), answer (A)
- * @param {string} message Promt message
+ * @param {string} message Message from client and gpt api
  */
 Conversation.prototype.setMessage = function (type, message) {
     this.lastMessage = this._data.items[this._data.lastIndex];
 
     // This is question
     if (!this.lastMessage) {
-        this.lastMessage = { question: '', answer: '' };
+        this.lastMessage = { question: '', answer: '', timeAt: Date.now() };
         this._data.items.push(this.lastMessage);
         this._data.lastIndex = this._data.items.length - 1;
     }
@@ -75,7 +85,7 @@ Conversation.prototype.setMessage = function (type, message) {
 Conversation.prototype.makePromt = function () {
     let promt = ``;
     this._data.items.forEach(item => {
-        promt += `Q:${item.question}\nA:${item.answer}\n\n`;
+        promt += `Q:${item.question}, limit ${this.answerLimit} chars\nA:${item.answer}\n\n`;
     });
     return promt;
 }

@@ -33,7 +33,7 @@ const OpenAI = {
         const __default = {
             "model": "text-davinci-003",
             "prompt": "Say this is a test",
-            "max_tokens": 100,
+            "max_tokens": 1000, // max to 2000
             "temperature": 0,
             "top_p": 1,
             "stop": ["\n"]
