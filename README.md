@@ -1,2 +1,4 @@
-# chatgpt-backend
-ChatGPT backend via api
+# ChatGPT Backend
+
+1. Create api chat with GPT.
+2. Store converations.
