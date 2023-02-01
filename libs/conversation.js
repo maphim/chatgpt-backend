@@ -7,6 +7,7 @@ const Conversation = function (id) {
 Conversation.prototype.init = function (id) {
 
     this.setLimitAnswer();
+    this.setNumRelatedMessage();
 
     if (!id) {
         this.makeId();
@@ -28,6 +29,14 @@ Conversation.prototype.emptyData = function () {
         lastIndex: 0,
         items: []
     }
+}
+
+/**
+ * Set the message sending limit most relevant to the conversationi
+ * @param {number} limit maximum messages send to gpt
+ * */
+Conversation.prototype.setNumRelatedMessage = function (limit = 5) {
+    this.numRelatedMessage = limit;
 }
 
 /**
@@ -82,9 +91,17 @@ Conversation.prototype.setMessage = function (type, message) {
     this.writeData();
 }
 
+Conversation.prototype.getRelatedMessage = function() {
+    if(this._data.items.length > this.numRelatedMessage) {
+       return this._data.items.slice(0 - this.numRelatedMessage);
+    } else {
+       return this._data.items;
+    }
+}
+
 Conversation.prototype.makePromt = function () {
     let promt = ``;
-    this._data.items.forEach(item => {
+    this.getRelatedMessage().forEach(item => {
         promt += `Q:${item.question}, limit ${this.answerLimit} chars\nA:${item.answer}\n\n`;
     });
     return promt;
