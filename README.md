@@ -1,7 +1,10 @@
-# ChatGPT Backend
+Build the chat backend to communicate with the GPT-3 API and store conversation infomation on the server.
 
-1. Create api chat with GPT.
-2. Store converations.
+# Features
+
+[x] Create api chat with GPT.
+[x] Store converations.
+[-] Speak via Google Speech (Google Translate)
 
 # How to use
 
