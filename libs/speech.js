@@ -92,8 +92,9 @@ class Speech {
         return this.voices;
     }
 
-    processLineText(text) {
+    processLineText(text, count = 0) {
         if (text.length <= 0) return true;
+        if (count >= 100) return false; // add termination condition
 
         let line = '';
         let indexSplit = text.substring(0, 200).search(/\,|;|:|\.|\(|\)|\"|\'/);
@@ -111,7 +112,7 @@ class Speech {
                 lastText = text.slice(indexSpace + 1).trim();
                 if (line.length > 0)
                     this.voices.push(this.transText2Voice(line));
-                return this.processLineText(lastText);
+                return this.processLineText(lastText, count + 1);
             }
         }
 
@@ -119,7 +120,7 @@ class Speech {
         if (line.length > 0)
             this.voices.push(this.transText2Voice(line));
 
-        return this.processLineText(lastText);
+        return this.processLineText(lastText, count + 1);
     }
 
     transText2Voice(query, params = {}) {
