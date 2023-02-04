@@ -4,8 +4,8 @@ Build the chat backend to communicate with the GPT-3 API and store conversation 
 
 - [x] Create api chat with GPT.
 - [x] Store converations.
+- [x] Speak via Google Speech (Google Translate)
 - [ ] Detect questions containing source code to properly navigate the model.
-- [ ] Speak via Google Speech (Google Translate)
 
 # How to use
 
