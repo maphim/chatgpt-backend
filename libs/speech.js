@@ -68,61 +68,73 @@ function calcHash(query, windowTkk) {
     return normalizedResult.toString() + "." + (normalizedResult ^ tkkIndex)
 }
 
-function processLineText(text) {
-    if (text.length <= 0) return true;
- 
-    let line = '';
-    let indexSplit = text.substring(0, 200).search(/\,|;|:|\.|\(|\)|\"|\'/);
-    let lastText = text.slice(indexSplit + 1).trim();
-
-    if (indexSplit < 0) {
-        if (lastText.length <= 0) {
-            line = text.trim();
-            if (line.length > 0)
-                self.dataOutput += `file ${self.trans2Voice(line, 'proxy')} ${os.EOL}`;
-            return true;
-        } else {
-            let indexSpace = text.substring(0, 200).lastIndexOf(" ");
-            line = text.substring(0, indexSpace).trim();
-            lastText = text.slice(indexSpace + 1).trim();
-            if (line.length > 0)
-                self.dataOutput += `file ${self.trans2Voice(line, 'proxy')} ${os.EOL}`;
-            return processLineText(lastText);
-        }
-    }
-
-    line = text.substring(0, indexSplit).trim();
-    if (line.length > 0)
-        self.dataOutput += `file ${self.trans2Voice(line, 'proxy')} ${os.EOL}`;
-
-    return processLineText(lastText);
-}
-
 var qs = require('querystring');
 
 class Speech {
 
-   constructor () {
-     this.lang = 'vi';
-     this.transKey = `410957.${Date.now()}`;
-   }
+    constructor() {
+        this.voices = [];
+        this.lang = 'vi';
+        this.transKey = `410957.${Date.now()}`;
+    }
 
-   calcHash(query) {
-     return calcHash(query, this.transKey);
-   }
+    calcHash(query) {
+        return calcHash(query, this.transKey);
+    }
 
-   transText2Voice(query, params={}) {
-     params = {...params, 
-	"ie": "UTF-8",
-        "tl": this.lang,
-        "client": "t",
-	 "q": query,
-         "tk": this.calcHash(query)
-     };
-     const googleTransUrl = `https://translate.google.com/translate_tts`;
-     let googleTransUrlVoice = `${googleTransUrl}?${qs.stringify(params)}`;
-     return googleTransUrlVoice.replace(/\'/gi, "\\\'");
-   }
+    /**
+     * Make text to voices
+     * @param {string} text 
+     * @returns Array list string of voices
+     */
+    makeVoices(text) {
+        this.processLineText(text);
+        return this.voices;
+    }
+
+    processLineText(text) {
+        if (text.length <= 0) return true;
+
+        let line = '';
+        let indexSplit = text.substring(0, 200).search(/\,|;|:|\.|\(|\)|\"|\'/);
+        let lastText = text.slice(indexSplit + 1).trim();
+
+        if (indexSplit < 0) {
+            if (lastText.length <= 0) {
+                line = text.trim();
+                if (line.length > 0)
+                    this.voices.push(this.transText2Voice(line));
+                return true;
+            } else {
+                let indexSpace = text.substring(0, 200).lastIndexOf(" ");
+                line = text.substring(0, indexSpace).trim();
+                lastText = text.slice(indexSpace + 1).trim();
+                if (line.length > 0)
+                    this.voices.push(this.transText2Voice(line));
+                return processLineText(lastText);
+            }
+        }
+
+        line = text.substring(0, indexSplit).trim();
+        if (line.length > 0)
+            this.voices.push(this.transText2Voice(line));
+
+        return processLineText(lastText);
+    }
+
+    transText2Voice(query, params = {}) {
+        params = {
+            ...params,
+            "ie": "UTF-8",
+            "tl": this.lang,
+            "client": "t",
+            "q": query,
+            "tk": this.calcHash(query)
+        };
+        const googleTransUrl = `https://translate.google.com/translate_tts`;
+        let googleTransUrlVoice = `${googleTransUrl}?${qs.stringify(params)}`;
+        return googleTransUrlVoice.replace(/\'/gi, "\\\'");
+    }
 
 }
 

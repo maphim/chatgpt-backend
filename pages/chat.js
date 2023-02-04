@@ -26,9 +26,9 @@ router.post('/message', async function (req, res) {
 
     if (resp && resp.choices) {
         const answer = resp.choices[0].text;
-	const voices = speech.transText2Voice(answer);
+        const voices = speech.makeVoices(answer);
         chat.setMessage('answer', answer);
-        return res.send({ id: chat._id, message: chat.lastMessage, voices , items: chat._data.items });
+        return res.send({ id: chat._id, message: chat.lastMessage, voices, items: chat._data.items });
     }
 
     res.send(`error send message`);
