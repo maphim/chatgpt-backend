@@ -92,35 +92,34 @@ class Speech {
         return this.voices;
     }
 
-    processLineText(text, count = 0) {
-        if (text.length <= 0) return true;
-        if (count >= 100) return false; // add termination condition
+    processLineText(text) {
+        let index = 0;
+        let length = text.length;
 
-        let line = '';
-        let indexSplit = text.substring(0, 200).search(/\,|;|:|\.|\(|\)|\"|\'/);
-        let lastText = text.slice(indexSplit + 1).trim();
+        while (index < length) {
+            let indexSplit = text.substring(index, index + 200).search(/\,|;|:|\.|\(|\)|\"|\'/);
+            let line = '';
+            let lastIndex = index;
 
-        if (indexSplit < 0) {
-            if (lastText.length <= 0) {
-                line = text.trim();
-                if (line.length > 0)
-                    this.voices.push(this.transText2Voice(line));
-                return true;
+            if (indexSplit >= 0) {
+                line = text.substring(index, index + indexSplit).trim();
+                lastIndex = index + indexSplit + 1;
             } else {
-                let indexSpace = text.substring(0, 200).lastIndexOf(" ");
-                line = text.substring(0, indexSpace).trim();
-                lastText = text.slice(indexSpace + 1).trim();
-                if (line.length > 0)
-                    this.voices.push(this.transText2Voice(line));
-                return this.processLineText(lastText, count + 1);
+                let indexSpace = text.substring(index, index + 200).lastIndexOf(" ");
+                if (indexSpace >= 0) {
+                    line = text.substring(index, index + indexSpace).trim();
+                    lastIndex = index + indexSpace + 1;
+                } else {
+                    line = text.substring(index).trim();
+                    lastIndex = length;
+                }
             }
+
+            if (line.length > 0)
+                this.voices.push(this.transText2Voice(line));
+
+            index = lastIndex;
         }
-
-        line = text.substring(0, indexSplit).trim();
-        if (line.length > 0)
-            this.voices.push(this.transText2Voice(line));
-
-        return this.processLineText(lastText, count + 1);
     }
 
     transText2Voice(query, params = {}) {

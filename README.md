@@ -7,6 +7,15 @@ Build the chat backend to communicate with the GPT-3 API and store conversation 
 - [x] Speak via Google Speech (Google Translate)
 - [ ] Detect questions containing source code to properly navigate the model.
 
+# Convert GPT-3's answer into sister Google's voice.
+
+```
+const speech = new Speech(your_key_language); // default vi
+const voices = speech.makeVoices(answer); // list voices
+```
+![example send message](https://raw.githubusercontent.com/maphim/chatgpt-backend/main/images/voices.png?raw=true)
+
+
 # How to use
 
 1. Install package `npm install`
