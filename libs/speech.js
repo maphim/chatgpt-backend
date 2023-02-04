@@ -72,9 +72,9 @@ var qs = require('querystring');
 
 class Speech {
 
-    constructor() {
+    constructor(lang = 'vi') {
         this.voices = [];
-        this.lang = 'vi';
+        this.lang = lang;
         this.transKey = `410957.${Date.now()}`;
     }
 
@@ -111,7 +111,7 @@ class Speech {
                 lastText = text.slice(indexSpace + 1).trim();
                 if (line.length > 0)
                     this.voices.push(this.transText2Voice(line));
-                return processLineText(lastText);
+                return this.processLineText(lastText);
             }
         }
 
@@ -119,7 +119,7 @@ class Speech {
         if (line.length > 0)
             this.voices.push(this.transText2Voice(line));
 
-        return processLineText(lastText);
+        return this.processLineText(lastText);
     }
 
     transText2Voice(query, params = {}) {
