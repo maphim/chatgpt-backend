@@ -92,6 +92,15 @@ class Speech {
         return this.voices;
     }
 
+    /**
+    * Make text to voice
+    * @param {string} text 
+    * @returns Url voice
+    */
+    makeVoice(text) {
+        return this.transText2Voice(text);
+    }
+
     processLineText(text) {
         let index = 0;
         let length = text.length;
