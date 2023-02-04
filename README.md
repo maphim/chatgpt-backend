@@ -13,6 +13,16 @@ Build the chat backend to communicate with the GPT-3 API and store conversation 
 const speech = new Speech(your_key_language); // default vi
 const voices = speech.makeVoices(answer); // list voices
 ```
+
+Result
+```
+    "voices": [
+        "https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=t&q=Vi%E1%BB%87t%20Nam%20c%C3%B3%20di%E1%BB%87n%20t%C3%ADch%20l%C3%A0%20331&tk=134316.281057",
+        "https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=t&q=690%20km2&tk=8509.418928",
+        "https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=t&q=Ch%C3%BAc%20b%E1%BA%A1n%20c%C3%B3%20m%E1%BB%99t%20ng%C3%A0y%20tuy%E1%BB%87t&tk=275853.159936",
+        "https://translate.google.com/translate_tts?ie=UTF-8&tl=vi&client=t&q=v%E1%BB%9Di!&tk=823993.710644"
+    ],
+```
 ![example send message](https://raw.githubusercontent.com/maphim/chatgpt-backend/main/images/voices.png?raw=true)
 
 
