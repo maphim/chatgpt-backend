@@ -20,7 +20,7 @@ router.get('/', async function (req, res) {
     response.data.pipe(res);
 
   } catch (error) {
-    res.status(500).send(error);
+    res.status(500).send(error.message);
   }
 });
 
