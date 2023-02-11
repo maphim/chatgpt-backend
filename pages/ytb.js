@@ -10,7 +10,7 @@ const router = express.Router();
 router.get('/', async function (req, res) {
   try {
     const videoId = req.query.v;
-    const { dlink } = downloadYTB.fetchVideo(videoId);
+    const { dlink, title, ftype } = await (new downloadYTB()).fetchVideo(videoId);
 
     const response = await axios.get(dlink, {
       responseType: 'stream'
@@ -20,7 +20,7 @@ router.get('/', async function (req, res) {
     response.data.pipe(res);
 
   } catch (error) {
-    res.status(500).send(error.message);
+    res.status(500).send(error);
   }
 });
 
