@@ -47,11 +47,11 @@ export default class DownloadYTB {
     }
 
     async fetchVideo(videoId) {
-        const { vid, links } = await request(`https://yt1s.com/api/ajaxSearch/index`, {
+        const { vid, links } = await this.request(`https://yt1s.com/api/ajaxSearch/index`, {
             q: "https://youtu.be/8xHUXj1hSTE",
             vt: "home"
         })
-        const r = await request(`https://yt1s.com/api/ajaxConvert/convert`, {
+        const r = await this.request(`https://yt1s.com/api/ajaxConvert/convert`, {
             vid,
             k: links.mp3.mp3128.k
         })
