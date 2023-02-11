@@ -1,4 +1,4 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
 
 const Conversation = require('../libs/conversation');
@@ -11,4 +11,4 @@ router.get('/', function (req, res) {
     res.send(`homepage`);
 })
 
-module.exports = router;
+export default router;

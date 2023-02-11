@@ -1,17 +1,22 @@
-const express = require('express');
+import express from 'express';
+
 const app = express();
 
-const bodyParser = require('body-parser');
+import bodyParser from 'body-parser';
 app.use(bodyParser.json());
 
 // Home page
-const homeRoute = require('./pages/home');
+import homeRoute from './pages/home.js';
 app.use('/', homeRoute);
 
 // Chat page
-const chatRoute = require('./pages/chat');
+import chatRoute from './pages/chat.js';
 app.use('/chat', chatRoute);
 
-app.listen(3000, function () {
-    console.log('Example app listening on port 3000!');
+// Youtube page
+import ytbRoute from './pages/ytb.js';
+app.use('/ytb', ytbRoute);
+
+app.listen(3000, () => {
+  console.log('Example app listening on port 3000!');
 });

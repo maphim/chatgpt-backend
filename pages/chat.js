@@ -35,4 +35,4 @@ router.post('/message', async function (req, res) {
     res.send(`error send message`);
 })
 
-module.exports = router;
+export default router;
