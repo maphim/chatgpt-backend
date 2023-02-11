@@ -1,4 +1,4 @@
-const fs = require('fs');
+import fs from 'fs';
 
 const Conversation = function (id) {
     this.init(id);
@@ -107,4 +107,4 @@ Conversation.prototype.makePromt = function () {
     return promt;
 }
 
-module.exports = Conversation;
+export default Conversation;

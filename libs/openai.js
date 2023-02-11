@@ -1,4 +1,4 @@
-const axios = require('axios');
+import axios from 'axios';
 
 axios.defaults.baseURL = 'https://api.openai.com/v1/';
 
@@ -43,4 +43,4 @@ const OpenAI = {
 
 }
 
-module.exports = OpenAI;
+export default OpenAI;

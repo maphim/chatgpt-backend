@@ -1,9 +1,9 @@
-const express = require('express');
-const router = express.Router();
+import express from 'express';
+import openai from '../libs/openai';
+import Speech from '../libs/speech';
+import Conversation from '../libs/conversation';
 
-const openai = require('../libs/openai');
-const Speech = require('../libs/speech');
-const Conversation = require('../libs/conversation');
+const router = express.Router();
 
 router.get('/', function (req, res) {
     res.send(`this is chat page`);

@@ -68,7 +68,7 @@ function calcHash(query, windowTkk) {
     return normalizedResult.toString() + "." + (normalizedResult ^ tkkIndex)
 }
 
-var qs = require('querystring');
+import qs from 'querystring';
 
 class Speech {
 
@@ -147,4 +147,4 @@ class Speech {
 
 }
 
-module.exports = Speech;
+export default Speech;
