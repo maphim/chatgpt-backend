@@ -6,7 +6,7 @@ export default class DownloadYTB {
 
     constructor() { }
 
-    request(url, params) {
+    async request(url, params) {
 
         console.log(`${url} / params -> `, params);
 
