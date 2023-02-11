@@ -7,21 +7,21 @@ import downloadYTB from '../libs/down.youtube.js';
 
 const router = express.Router();
 
-router.get('/', function (req, res) {
-    try {
-        const videoId = req.query.v;
-        const { dlink } = downloadYTB.fetchVideo(videoId);
+router.get('/', async function (req, res) {
+  try {
+    const videoId = req.query.v;
+    const { dlink } = downloadYTB.fetchVideo(videoId);
 
-        const response = await axios.get(dlink, {
-          responseType: 'stream'
-        });
+    const response = await axios.get(dlink, {
+      responseType: 'stream'
+    });
 
-        res.set('Content-Type', 'video/mp4');
-        response.data.pipe(res);
+    res.set('Content-Type', 'video/mp4');
+    response.data.pipe(res);
 
-      } catch (error) {
-        res.status(500).send(error.message);
-      }
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
 });
 
 export default router;
