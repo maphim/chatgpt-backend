@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link rel="icon" href="https://glitch.com/favicon.ico" />
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@4.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <script src="https://www.youtube.com/iframe_api"></script>
+
+    <style>
+        #player {
+            width: 100%;
+            border-radius: 15px;
+            border: 1px solid #bebebe;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div>
+        <audio id="myAudio" controls>
+            <source src="./ytb?v=8xHUXj1hSTE" type="audio/mp3">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+
+    <div>
+        <button id="backwardBtn" class="btn btn-secondary">
+            <i class="bi bi-skip-backward-fill"></i> Backward 5 Seconds
+        </button>
+        <button id="forwardBtn" class="btn btn-secondary">
+            Forward 5 Seconds <i class="bi bi-skip-forward-fill"></i>
+        </button>
+    </div>
+
+    <script>
+        const audio = document.getElementById("myAudio");
+        const backwardBtn = document.getElementById("backwardBtn");
+        const forwardBtn = document.getElementById("forwardBtn");
+        const playbackTime = localStorage.getItem("playbackTime");
+
+        if (playbackTime) {
+            audio.currentTime = playbackTime;
+        }
+
+        backwardBtn.addEventListener("click", () => {
+            audio.currentTime -= 5;
+        });
+
+        forwardBtn.addEventListener("click", () => {
+            audio.currentTime += 5;
+        });
+
+        audio.addEventListener("timeupdate", () => {
+            localStorage.setItem("playbackTime", audio.currentTime);
+        });
+    </script>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

@@ -2,6 +2,9 @@ import express from 'express';
 
 const app = express();
 
+// Serve files from the public directory
+app.use(express.static(path.join(__dirname, 'public')));
+
 import bodyParser from 'body-parser';
 app.use(bodyParser.json());
 
