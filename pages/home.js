@@ -1,8 +1,8 @@
 import express from 'express';
 const router = express.Router();
 
-const Conversation = require('../libs/conversation');
-const Speech = require('../libs/speech');
+import Speech from '../libs/speech.js';
+import Conversation from '../libs/conversation.js';
 
 router.get('/', function (req, res) {
     const s = new Speech();

@@ -1,7 +1,7 @@
 import express from 'express';
-import openai from '../libs/openai';
-import Speech from '../libs/speech';
-import Conversation from '../libs/conversation';
+import openai from '../libs/openai.js';
+import Speech from '../libs/speech.js';
+import Conversation from '../libs/conversation.js';
 
 const router = express.Router();
 
