@@ -18,10 +18,46 @@
     <script src="https://www.youtube.com/iframe_api"></script>
 
     <style>
-        #player {
+        audio::-webkit-progress-value {
+            background-color: orange;
+        }
+
+        /* Style the audio player */
+        #audio-controls {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+        }
+
+        audio {
             width: 100%;
-            border-radius: 15px;
-            border: 1px solid #bebebe;
+            margin: 10px 0;
+        }
+
+        /* Style the buttons */
+        .btn {
+            display: inline-block;
+            margin: 10px;
+            padding: 10px 20px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #555;
+        }
+
+        #backwardBtn i {
+            margin-right: 10px;
+        }
+
+        #forwardBtn i {
+            margin-left: 10px;
         }
     </style>
 
